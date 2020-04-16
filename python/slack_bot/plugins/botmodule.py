@@ -7,6 +7,7 @@ from slackbot.bot import respond_to    # メンションで反応する
 from slackbot.bot import listen_to     # メンション無しで反応する
 from slackbot.bot import default_reply # メンションで該当する単語がないと反応
 from datetime import datetime          # 日付,時間情報を取得する
+from random import choice
 
 #########################################
 # 「respond_to」はメンションする
@@ -80,6 +81,12 @@ def kashi_func(message):
 @listen_to('かわいい')
 def ka_func(message):
     message.reply('はｯ？')
+
+@listen_to('酒')
+def liquar_func(message):
+    drink = ('水', 'お茶', '青汁', 'カレー', 'サーモン')
+    response = '\n飲みましょう！\n\n各自...\n自宅で...\n{}などを...'.format(choice(drink))
+    message.reply(response)
 
 #########################################
 # 「default_reply」はデフォルトの応答

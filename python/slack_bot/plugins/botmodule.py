@@ -11,6 +11,8 @@ from slackbot.bot import listen_to     # メンション無しで反応する
 from slackbot.bot import default_reply # メンションで該当する単語がないと反応
 from datetime import datetime          # 日付,時間情報を取得する
 from random import choice
+from random import randrange
+import re
 
 #########################################
 # 「respond_to」はメンションする
@@ -93,6 +95,29 @@ def liquar_func(message):
     drink = ('水', 'お茶', '青汁', 'カレー', 'サーモン')
     response = '\n飲みましょう！\n\n各自...\n自宅で...\n{}などを...'.format(choice(drink))
     message.reply(response)
+
+@listen_to('.')
+def de_func(message):
+    """
+    ランダムで反応させる
+    """
+    #デフォルトでは1/25の確率
+    denomi = 25
+
+    text = message.body['text']
+
+    #疑問文の場合は1/3の確率
+    matched = re.search(r'(\?|？)$', text)
+    if matched:
+        denomi = 2
+
+    matched = re.search(r'(w|笑|\(笑\)|（笑）)$', text)
+    if matched:
+        print('foo')
+        denomi = 0
+
+    if not denomi or not randrange(denomi):
+        message.reply('\nで？')
 
 #########################################
 # 「default_reply」はデフォルトの応答

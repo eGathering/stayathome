@@ -1,7 +1,10 @@
-# bot ちゃんの命の源
-#
-# note:
-#
+#!/usr/bin/python3
+"""
+bot ちゃんの命の源
+
+note:
+"""
+
 
 from slackbot.bot import Bot
 

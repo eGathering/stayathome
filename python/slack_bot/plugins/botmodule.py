@@ -1,7 +1,10 @@
-# bot ちゃんがどんな単語で反応するかを書く
-#
-# note:
-#   検出単語を table 化して table に追加すると賢くなる仕組みにしたい。
+#!/usr/bin/python3
+"""
+bot ちゃんがどんな単語で反応するかを書く
+
+note:
+  検出単語を table 化して table に追加すると賢くなる仕組みにしたい。
+"""
 
 from slackbot.bot import respond_to    # メンションで反応する
 from slackbot.bot import listen_to     # メンション無しで反応する
@@ -15,6 +18,9 @@ from random import choice
 #########################################
 @respond_to('こんにちは')
 def sample_1(message):
+    """
+    サンプルの関数
+    """
     # メンションをつけて応答
     message.reply('こんにちは!')
 

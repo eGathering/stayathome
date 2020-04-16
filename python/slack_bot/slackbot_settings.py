@@ -1,8 +1,11 @@
-# slackbot の設定ファイル
-#
-# note:
-#   API トークンはネットワーク上に上げると無効化されるため環境変数から呼び出す
-#   環境変数 SLACK_BOT_API_TOKEN に APIトークンを設定しておくこと
+#!/usr/bin/python3
+"""
+slackbot の設定ファイル
+
+note:
+  API トークンはネットワーク上に上げると無効化されるため環境変数から呼び出す
+  環境変数 SLACK_BOT_API_TOKEN に APIトークンを設定しておくこと
+"""
 
 import os
 

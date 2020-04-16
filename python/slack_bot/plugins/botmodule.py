@@ -109,14 +109,15 @@ def de_func(message):
     #疑問文の場合は1/3の確率
     matched = re.search(r'(\?|？)$', text)
     if matched:
-        denomi = 2
+        denomi = 3
 
-    matched = re.search(r'(w|笑|\(笑\)|（笑）)$', text)
+    #草は1/5の確率
+    matched = re.search(r'(Ｗ|W|ｗ|w|笑|\(笑\)|（笑）)$', text)
     if matched:
-        print('foo')
-        denomi = 0
+        denomi = 5
 
-    if not denomi or not randrange(denomi):
+    rangevalue = denomi - 1 if denomi > 0 else 0
+    if not rangevalue or not randrange(rangevalue):
         message.reply('\nで？')
 
 #########################################

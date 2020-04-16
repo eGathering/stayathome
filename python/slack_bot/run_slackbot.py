@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # bot ちゃんの命の源
 #
 # note:

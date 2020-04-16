@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # bot ちゃんがどんな単語で反応するかを書く
 #
 # note:

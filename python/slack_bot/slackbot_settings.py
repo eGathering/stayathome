@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # slackbot の設定ファイル
 #
 # note:

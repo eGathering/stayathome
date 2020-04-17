@@ -1,11 +1,14 @@
-# チャンネルかスレッドかどうかで応答先を切り替える
+#!/usr/bin/python3
+"""
+チャンネルかスレッドかどうかで応答先を切り替える
+"""
 
 """
 message.send() の代わりの関数
   :param messsage: slackbotのmessageオブジェクト
   :param text    : 送信するテキストメッセージ
 """
-def botsend(message, text):
+def botSend(message, text):
     if 'thread_ts' in message.body:
         # スレッド内のメッセージの場合
         message.send(text, thread_ts=message.thread_ts)
@@ -19,7 +22,7 @@ message.reply() の代わりの関数
   :param messsage: slackbotのmessageオブジェクト
   :param text    : 送信するテキストメッセージ
 """
-def botreply(message, text):
+def botReply(message, text):
     if 'thread_ts' in message.body:
         # スレッド内のメッセージの場合
         message.reply(text, in_thread=True)

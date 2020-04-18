@@ -18,6 +18,7 @@ from plugins.botmessage import botSend             # message.send() の代わり
 from plugins.botmessage import botReply            # message.reply() の代わりの関数
 from plugins.replyDictionary import getReplyMsg    # 頭脳(辞書)
 from plugins.replyDictionary import getListenWord  # 頭脳(辞書)
+from .wf import weather                            # 天気予報
 
 #########################################
 # 「respond_to」はメンションする
@@ -32,6 +33,11 @@ def get_time_now(message):
     # メンションつけて応答
     botReply(message, str(dt_now.hour) + "時" + str(dt_now.minute) + "分だZ！")
 
+@respond_to('天気')
+def weather_forecast(message):
+    text = message.body['text']
+    for line in weather.forecast(text):
+        botReply(message, line)
 
 @respond_to('.')
 def reply_dict_Msg(message):

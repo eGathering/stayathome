@@ -1,29 +1,72 @@
 #!/usr/bin/python3
 
 """
-bot ちゃんの定型文
+bot ちゃんの定型文をjsonファイルに読み書きする
+
+note:
+  日本語ファイルを開く時は
+   codecs.open() でコーデック指定する
+  jsonファイルに書く時は
+   json.dump の第二引数に ensure_ascii=False を付けてASCII指定にする
 """
+
+import json
+import codecs
+import os
+
 # メンション有りで反応するキーワード辞書
 reply_Msg = {
-    # 受けたメッセージ: [返すメッセージ, メンション有り反応(Reply) or メンション無し反応(Send)]
     'NoReplyMsg': ['NoReplyMsg', 'Reply'],
-    'こんにちは': ['こんにちは!', 'Reply'],
-    'お疲れ様です': ['おつかー', 'Reply'],
-    '嫌い': ['なんとも思わないです。', 'Reply'],
-    'キライ': ['奇遇ですね。私もです・・・', 'Reply'],
-    '励ます': ['ハゲるんですか？頑張って下さい。', 'Reply'],
-    'かわいい': ['あんたバカァ⁈', 'Reply'],
-    'おやすみ': ['おやすみなさい。\nまた明日。\n一周回ってまた来週。\n明日が来ない日なんてこないから。\n全部コロナが悪いから。\n', 'Reply'],
-    '名前': ['ボクサッチー、ヨロシクネ', 'Reply'],
 }
 
 # メンション無しで反応するキーワード辞書
 listen_Msg = {
-    # 受けたメッセージ: [返すメッセージ, メンション有り反応(Reply) or メンション無し反応(Send)]
     'NoListenWord': ['NoListenWord', 'Reply'],
-    'ツンデレ': ['ツンツンデレデレパッパラパ〜٩( ᐛ )و', 'Reply'],
-    'かわいい': ['私のことですね？知ってますよ。', 'Reply'],
-    'botちゃん': ['ボクサッチー、ヨロシクネ', 'Reply'],
-    'かしこい': ['かわいい!!エリーチカ!!', 'Send'],
 }
+
+#########################################
+# json ファイル操作
+#########################################
+
+_reply_fileName = '/plugins/jsonDict/reply_Msg.json'
+_listen_fileName = '/plugins/jsonDict/listen_Msg.json'
+#_reply_fileName = '/jsonDict/reply_Msg.json'
+#_listen_fileName = '/jsonDict/listen_Msg.json'
+
+def write_json(mention, key, msg, type):
+    textMsg = {key : [msg, type],}
+
+    if 'reply' in mention:
+        path = os.getcwd() + _reply_fileName
+    else:
+        path = os.getcwd() + _listen_fileName
+
+    # ファイルが存在してサイズが0じゃなければ　read & verify
+    if os.path.exists(path) == True:
+        if os.path.getsize(path) > 1:
+            readFp = codecs.open(path,'r','utf-8')
+            json_data = json.load(readFp)
+            textMsg.update(json_data)
+
+    writeFp = codecs.open(path,'w','utf-8')
+    json.dump(textMsg, writeFp, ensure_ascii=False, indent=4)
+
+def load_json():
+    replyFp = codecs.open(os.getcwd() + _reply_fileName,'r','utf-8')
+    json_data = json.load(replyFp)
+    reply_Msg.update(json_data)
+
+    listenFp = codecs.open(os.getcwd() + _listen_fileName,'r','utf-8')
+    json_data = json.load(listenFp)
+    listen_Msg.update(json_data)
+    print(reply_Msg)
+
+if __name__ == "__main__":
+    print('start languageDictionary')
+    write_json('reply', 'テヤンデイ', 'あんたバカァ⁈', 'Reply')
+    load_json()
+    print("reply_Msg")
+    print(reply_Msg)
+    print("listen_Msg")
+    print(listen_Msg)
 

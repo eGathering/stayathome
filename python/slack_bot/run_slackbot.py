@@ -7,11 +7,13 @@ note:
 
 
 from slackbot.bot import Bot
+from plugins.replyDictionary import load_json
 
 # Botを起動する
 def main():
-  bot = Bot()
-  bot.run()
+    load_json()
+    bot = Bot()
+    bot.run()
 
 if __name__ == "__main__":
-  main()
+    main()

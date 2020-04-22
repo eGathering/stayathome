@@ -6,19 +6,19 @@ note:
   検出単語に対して定型文で返す場合は replyDictionary.py に追加する
 """
 
-from slackbot.bot import respond_to     # メンションで反応する
-from slackbot.bot import listen_to      # メンション無しで反応する
-from slackbot.bot import default_reply  # メンションで該当する単語がないと反応
-from datetime import datetime           # 日付,時間情報を取得する
+from slackbot.bot import respond_to      # メンションで反応する
+from slackbot.bot import listen_to       # メンション無しで反応する
+from slackbot.bot import default_reply   # メンションで該当する単語がないと反応
+from datetime import datetime            # 日付,時間情報を取得する
 from random import choice
 from random import randrange
 import re
 
-from .botmessage import botSend             # message.send() の代わりの関数
-from .botmessage import botReply            # message.reply() の代わりの関数
-from .replyDictionary import reply_Msg      # 頭脳(辞書)
-from .replyDictionary import listen_Msg     # 頭脳(辞書)
-from .wf import weather                     # 天気予報
+from .botmessage import botSend          # message.send() の代わりの関数
+from .botmessage import botReply         # message.reply() の代わりの関数
+from .replyDictionary import reply_Msg   # 頭脳(辞書)
+from .replyDictionary import listen_Msg  # 頭脳(辞書)
+from .wf import weather                  # 天気予報
 
 #########################################
 # カスタム定型文の関数

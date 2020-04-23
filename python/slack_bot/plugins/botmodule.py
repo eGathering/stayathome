@@ -18,6 +18,7 @@ from .botmessage import botSend          # message.send() の代わりの関数
 from .botmessage import botReply         # message.reply() の代わりの関数
 from .replyDictionary import reply_Msg   # 頭脳(辞書)
 from .replyDictionary import listen_Msg  # 頭脳(辞書)
+from .replyDictionary import add_dict    # 賢くなーれ
 from .wf import weather                  # 天気予報
 
 #########################################
@@ -45,6 +46,14 @@ def liquar_func(message):
     drink = ('水', 'お茶', '青汁', 'カレー', 'サーモン')
     response = '\n飲みましょう！\n\n各自...\n自宅で...\n{}などを...'.format(choice(drink))
     botReply(message, response)
+
+
+def add_word(message):
+    text = message.body['text']
+    if False == add_dict(text):
+        botReply(message, "[ERROR] usage\n addWord : mention(reply/listen), key, replyMsg, Reply/Send \n例) addWord : reply, 名前, ボクサッチー,ヨロシクネ,Reply")
+    else:
+        botReply(message, "[success] レベルアップ!!")
 
 
 def de_func(message):
@@ -75,6 +84,7 @@ def de_func(message):
 # 関数テーブル
 func_Msg = {
     # 受けたメッセージ: 関数名
+    'addWord': add_word,
     '今何時': get_time_now,
     '仕事終わ': end_job,
     '天気': weather_forecast,

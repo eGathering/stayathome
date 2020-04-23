@@ -33,7 +33,7 @@ _listen_fileName = '/plugins/jsonDict/listen_Msg.json'
 #_reply_fileName = '/jsonDict/reply_Msg.json'
 #_listen_fileName = '/jsonDict/listen_Msg.json'
 
-def write_json(mention, key, msg, type):
+def _write_json(mention, key, msg, type):
     textMsg = {key : [msg, type],}
 
     if 'reply' in mention:
@@ -51,6 +51,7 @@ def write_json(mention, key, msg, type):
     writeFp = codecs.open(path,'w','utf-8')
     json.dump(textMsg, writeFp, ensure_ascii=False, indent=4)
 
+
 def load_json():
     replyFp = codecs.open(os.getcwd() + _reply_fileName,'r','utf-8')
     json_data = json.load(replyFp)
@@ -59,14 +60,21 @@ def load_json():
     listenFp = codecs.open(os.getcwd() + _listen_fileName,'r','utf-8')
     json_data = json.load(listenFp)
     listen_Msg.update(json_data)
-    print(reply_Msg)
 
-if __name__ == "__main__":
-    print('start languageDictionary')
-    write_json('reply', 'テヤンデイ', 'あんたバカァ⁈', 'Reply')
+
+def add_dict(string):
+    _text = string.replace(' ', '').replace('addWord:', '')
+    try:
+        _word = _text.split(',')
+    except ValueError:
+        # Error
+        return False
+
+    if 4 != len(_word):
+        # Error
+        return False
+
+    _write_json(_word[0], _word[1], _word[2], _word[3])
     load_json()
-    print("reply_Msg")
-    print(reply_Msg)
-    print("listen_Msg")
-    print(listen_Msg)
+    return True
 

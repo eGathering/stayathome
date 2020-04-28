@@ -47,6 +47,9 @@ def _write_json(mention, key, msg, type):
             readFp = codecs.open(path,'r','utf-8')
             json_data = json.load(readFp)
             textMsg.update(json_data)
+            if not ('invalid' in json_data.get(key, 'invalid')):
+                textMsg[key][0] = msg
+                textMsg[key][1] = type
 
     writeFp = codecs.open(path,'w','utf-8')
     json.dump(textMsg, writeFp, ensure_ascii=False, indent=4)
